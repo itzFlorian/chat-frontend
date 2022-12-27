@@ -1,7 +1,7 @@
-import { registerRoute } from "../routes/ApiRoutes.js";
+import { registerRoute } from "../api-routes/ApiRoutes.js";
 
-import { useState, useEffect } from "react";
-import {Link} from "react-router-dom"
+import { useState } from "react";
+import {Link, useNavigate} from "react-router-dom"
 
 // IMPORT TOAST UND STANDARAUSSEHEN
 import { toast, ToastContainer } from "react-toastify";
@@ -10,7 +10,8 @@ import "react-toastify/dist/ReactToastify.css"
 
 import "../styles/register.scss"
 
-const Register = () => {    
+const Register = () => { 
+  const navigate = useNavigate()   
   const [input, setInput] = useState({
     username: "",
     email:"",
@@ -19,9 +20,9 @@ const Register = () => {
   })
 
   const handleSubmit = (e) => {
-    const {username, email, password} = input;
     e.preventDefault()
     if (handleValidation()){
+      const {username, email, password} = input;
       fetch(registerRoute, {
       method: 'POST',
       body: JSON.stringify({
@@ -34,8 +35,17 @@ const Register = () => {
       },
     })
   .then((response) => response.json())
-  .then((json) => console.log(json));
+  .then((data) => {
+    if(data.status === false){
+      toast.error(data.message, toastOptions)
+    }
+    if(data.status === true){
+      localStorage.setItem("chat-app-user",JSON.stringify(data.user))
+      navigate("/")
+    }
+  });
   }
+
   setInput(prev => prev = {
     username: "",
     email:"",
