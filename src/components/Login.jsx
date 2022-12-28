@@ -48,6 +48,8 @@ const Login = () => {
   }
 }
 
+
+
   const handleChange = (e) => {
     setInput(prev => prev = {...input, [e.target.name]:e.target.value})
   }
@@ -80,7 +82,7 @@ const Login = () => {
         <input type="text" name="username" placeholder="Username" onChange={handleChange} value={input.username}/>
         <input type="password" name="password" placeholder="Password" onChange={handleChange} value={input.password}/>
         <button type="submit">Submit</button>
-        <p>YOU DONT HAVE AN ACCOUNT ? <Link to ="/register"> Register </Link></p>
+        <p>YOU DONT HAVE AN ACCOUNT ? <Link to ="/users/register"> Register </Link></p>
       </form> 
     </div>
     <ToastContainer/>

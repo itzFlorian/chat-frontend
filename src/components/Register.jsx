@@ -92,7 +92,7 @@ const Register = () => {
         <input type="password" name="password" placeholder="Password" onChange={handleChange} value={input.password}/>
         <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} value={input.confirmPassword}/>
         <button type="submit">Submit</button>
-        <p>Already have an Account ? <Link to ="/login"> Login </Link></p>
+        <p>Already have an Account ? <Link to ="/users/login"> Login </Link></p>
       </form> 
     </div>
     <ToastContainer/>
