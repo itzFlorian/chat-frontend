@@ -39,19 +39,17 @@ const Register = () => {
     if(data.status === false){
       toast.error(data.message, toastOptions)
     }
-    if(data.status === true){
-      localStorage.setItem("chat-app-user",JSON.stringify(data.user))
-      navigate("/")
+    if(data.status === true){      
+      navigate("/login")
+      setInput(prev => prev = {
+        username: "",
+        email:"",
+        password:"",
+        confirmPassword:""
+      })
     }
   });
   }
-
-  setInput(prev => prev = {
-    username: "",
-    email:"",
-    password:"",
-    confirmPassword:""
-  })
 }
 
   const handleChange = (e) => {
