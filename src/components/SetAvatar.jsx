@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { setAvatarRoute } from "../api-routes/ApiRoutes.js";
+import { useNavigate, Link } from "react-router-dom";
+import { setAvatarRoute, checkUserRoute } from "../api-routes/ApiRoutes.js";
 import { Buffer } from "buffer";
 
 import Spinner from "./Spinner.jsx";
@@ -13,15 +13,6 @@ import "../styles/setAvatar.scss"
 //import axios
 import axios from "axios";
 
-useEffect(() => {
-  const token = localStorage.getItem("token")
-  if(token){
-    navigate("/")
-  }else{
-    navigate("users/login")
-  }
-},[])
-
 const INITITIAL = {
   avatars:[],
   isLoading:true,
@@ -29,11 +20,20 @@ const INITITIAL = {
 }
 
 const setAvatar = () => {
+  const navigate = useNavigate()
   const api = "https://api.multiavatar.com/4585123"
   const apiKey = "QabH9wuCRNqVJG"
-  const navigate = useNavigate()
-  
+
   const [selectAvatar, setSelectAvatar] = useState(INITITIAL)
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    if(token){
+      navigate("/")
+    }else{
+      navigate("/users/login")
+    } 
+  },[])  
 
   const toastOptions = {
     position:"bottom-right",
@@ -82,7 +82,7 @@ const setAvatar = () => {
     }
     fetchData()
   },[])
-  console.log(selectAvatar.isLoading);
+
   return (
       <div className="body">
         <div className="title-container">
@@ -99,6 +99,7 @@ const setAvatar = () => {
           })}
         </div>
         <button type="submit" onClick={setProfilePicture}>change picture</button>
+        <button type="submit" onClick={() => navigate("/")}><Link to="/">back</Link></button>
         <ToastContainer />
       </div> 
     )
