@@ -1,0 +1,40 @@
+.body{
+  background-color: #131324;
+  height:100vh;
+  width: 100vw;
+  color:white;
+  text-align: center;
+}
+h1{
+  padding: 50px;
+  font-size: 5rem;
+}
+.avatars{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:5rem;  
+  .avatar{
+    width:200px;
+  }
+  .selected{
+    border:5px solid red;
+    border-radius: 50%;
+  }
+}
+button{
+  margin-top:70px;
+  background-color: #997af0;
+  color:white;
+  padding: 0.8rem 1.8rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  &:hover{
+    background-color: #997af0ac;
+  }
+  &:active{
+    box-shadow: inset 0 0 2px 3px rgb(0 0 0 /0.5)        
+  }
+}

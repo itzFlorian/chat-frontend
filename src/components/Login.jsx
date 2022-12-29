@@ -38,6 +38,7 @@ const Login = () => {
     }
     if(data.status === true){
       localStorage.setItem("token",JSON.stringify(data.token))
+      localStorage.setItem("id", JSON.stringify(data.id))
       setInput(prev => prev = {
         username: "",
         password: ""
