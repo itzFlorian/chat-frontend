@@ -4,17 +4,26 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 
 import "../styles/chat.scss"
+import SearchFriend from "./SearchFriend.jsx";
+import Friends from "./Friends.jsx"
 
-import { addFriendRoute, searchRoute } from "../api-routes/ApiRoutes.js";
 
 
 const Chat = () => {
+
   const navigate = useNavigate()
-  const [search, setSearch] = useState("")
-  const [found, setFound] = useState(undefined)
+
+  const [currentUser, setCurrentUser] = useState(undefined)
+  const [friends, setFriends] = useState([])
+  const [currenChat, setCurrentChat] = useState(undefined)
   
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat)
+  }
+
+
   useEffect(() => {
-    const token = localStorage.getItem("token")
+    const token = JSON.parse(localStorage.getItem("token"))
     if(token){
       navigate("/")
     }else{
@@ -22,84 +31,24 @@ const Chat = () => {
     } 
   },[])
 
+  useEffect(()=>{
+    if(currentUser && !currentUser.isAvatarImgSet){
+      navigate("/users/setAvatar")
+    }
+  },[currentUser])
+
   const toastOptions = {
     position:"bottom-right",
     autoClose: 8000,
     theme:"dark"
   }
 
-  const changeHandler = (e) => {
-    setSearch(e.target.value)
-  }
-  const closeHandler = () => {
-    setFound(undefined)
-  }
-  const addFriendHandler = () => {
-    console.log(found._id);
-    const myId = JSON.parse(localStorage.getItem("id"))
-    console.log(myId);
-    fetch(`${addFriendRoute}/${found._id}`, {
-  method: 'PATCH',
-  body: JSON.stringify({
-    id: myId
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
-})
-  .then((response) => response.json())
-  .then((json) => {
-    if(json.status == true){
-      toast.info(json.message, toastOptions)
-      closeHandler()
-    }else{
-      toast.info(json.message, toastOptions)
-    }
-  });
-  }
-
-  const searchSubmitHandler = (e) => {
-    const token = JSON.parse(localStorage.getItem("token"))
-    console.log(search);
-    console.log(token);
-    e.preventDefault()
-    fetch(`${searchRoute}/${search}`,{
-      headers:{
-        authorization:`Bearer ${token}`
-      }
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        if (json.status === false){
-          toast.error(json.message, toastOptions)
-        }else{
-          setFound(json.existedUser)
-        }
-      });
-  }
-
   return (
     <>
       <div className="chat-container">
-        <div className="search">
-          <form onSubmit={searchSubmitHandler}></form>
-          <span>Search for Users: </span>
-          <input type="text" name="search" onChange={changeHandler} value={search} />
-          <button type="submit" onClick={searchSubmitHandler}>search</button>
-          {found && 
-            <div className="found-container">
-              <img className="picture" src={found.isAvatarImgSet ? found.avatarImg : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="" />
-              <p>{found.username}</p>
-              <button className="btn" onClick={addFriendHandler}>Add Friend</button>
-              <button className="btn" onClick={closeHandler}>close</button>
-            </div>
-          }
-        </div>
-
-
+        <SearchFriend friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser}/>
         <div className="container">
-
+          <Friends friends={friends} currentUser={currentUser} changeChat={handleChatChange}/>
         </div>
       </div>
       <ToastContainer/>

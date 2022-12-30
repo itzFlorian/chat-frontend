@@ -5,3 +5,4 @@ export const setAvatarRoute = `${host}/users/setAvatar`
 export const checkUserRoute = `${host}/users/check`
 export const searchRoute = `${host}/users/search`
 export const addFriendRoute = `${host}/users/addFriend`
+export const getAllFriendsRoute = `${host}/users/friends`

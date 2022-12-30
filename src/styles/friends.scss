@@ -1,0 +1,57 @@
+.brand{
+  background:transparent
+}
+p{
+  color:white;
+}
+.friends{
+  min-width: fit-content;
+  overflow: auto;
+  background-color: rgb(21, 24, 60);
+  height:100%;
+  &::-webkit-scrollbar{
+    width: 0.5rem;
+    &-thumb {
+      background-color: #303059;      
+      border-radius: 1rem;
+    }
+  }
+  .brand{
+    width: 100%;
+    img{
+      width:100%
+    }
+  }
+  .card-container{
+    display: flex;
+    min-width: fit-content;
+    background-color: #131324;
+    align-items: center;
+    border-radius: 0.8rem;
+    padding:0.5rem;
+    gap: 1.5rem;
+    margin:20px;
+    transition: 0.5s ease-in-out;
+     img{
+      margin:0;
+      padding:0;
+      width: 100px;
+     }
+     p{
+      font-size: 1.6rem;
+     }
+     .selected{
+      border:5px solid red;
+     }
+  }
+  @media screen and (max-width: 850px){
+    .card-container{
+      img{
+        width: 50px;
+      }
+      p{
+        font-size: 1rem;
+      }
+    }
+  }
+}

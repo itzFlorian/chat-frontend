@@ -1,0 +1,36 @@
+.search{
+  color:white;
+  align-self: start;
+  display: block;
+  margin:0 auto;
+  font-size: 1.3rem;
+  input{
+    background-color: transparent;
+    color: white;
+    padding: 5px;
+    border-radius: 8px;
+  }
+  .found-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:1rem;
+      .picture{
+        width: 100px;
+      }
+      p{
+        text-align: center;
+        font-size: 2rem;
+      }
+      .btn{
+        margin: 0;
+        padding:10px 15px
+      }     
+  }
+  @media screen and (max-width: 850px){
+    .search{
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}

@@ -26,14 +26,14 @@ const setAvatar = () => {
 
   const [selectAvatar, setSelectAvatar] = useState(INITITIAL)
 
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if(token){
-      navigate("/")
-    }else{
-      navigate("/users/login")
-    } 
-  },[])  
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token")
+  //   if(token){
+  //     navigate("/")
+  //   }else{
+  //     navigate("/users/login")
+  //   } 
+  // },[])  
 
   const toastOptions = {
     position:"bottom-right",
@@ -73,7 +73,7 @@ const setAvatar = () => {
     const data = [] 
     const fetchData = async () => {
       for (let i=0 ; i<4 ; i++ ){
-        const image = await axios.get(`${api}/${Math.floor(Math.random()*1000)}?apikey=${apiKey}`)
+        const image = await axios.get(`${api}/${Math.floor(Math.random()*1000)}`)
         console.log(image.data);
         const buffer = new Buffer(image.data)
         data.push(buffer.toString("base64"))   
@@ -99,7 +99,7 @@ const setAvatar = () => {
           })}
         </div>
         <button type="submit" onClick={setProfilePicture}>change picture</button>
-        <button type="submit" onClick={() => navigate("/")}><Link to="/">back</Link></button>
+        <button type="submit" onClick={() => navigate("/")}><Link to="/">to Chat</Link></button>
         <ToastContainer />
       </div> 
     )
