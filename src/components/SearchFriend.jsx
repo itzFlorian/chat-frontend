@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css"
 import "../styles/searchFriend.scss"
 import { addFriendRoute, searchRoute, getAllFriendsRoute } from "../api-routes/ApiRoutes.js";
 
-
+import Logout from "./Logout.jsx";
 const SearchFriend = ({setCurrentUser, setFriends}) => {  
   const [search, setSearch] = useState("")
   const [found, setFound] = useState(undefined)
@@ -91,7 +91,7 @@ const SearchFriend = ({setCurrentUser, setFriends}) => {
       <button type="submit" onClick={searchSubmitHandler}>search</button>
       {found && 
       <div className="found-container">
-        <img className="picture" src={found.isAvatarImgSet ? found.avatarImg : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="" />
+        <img className="picture" src={found.isAvatarImgSet ? `data:image/svg+xml;base64,${found.avatarImg}` : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="" />
         <p>{found.username}</p>
         <button className="btn" onClick={addFriendHandler}>Add Friend</button>
         <button className="btn" onClick={closeHandler}>close</button>

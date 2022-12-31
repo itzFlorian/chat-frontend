@@ -1,0 +1,19 @@
+.user-details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:1rem;
+  color:white;
+  .user{
+    width: 75px;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+  }
+  .logout{
+    padding: 0 2rem;
+    align-items: start;
+    justify-self: start;
+  }
+
+}

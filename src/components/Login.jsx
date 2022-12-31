@@ -3,6 +3,8 @@ import { loginRoute } from "../api-routes/ApiRoutes.js";
 import { useState } from "react";
 import {Link, useNavigate} from "react-router-dom"
 
+import logo from "../logo/Decrypt.png"
+
 // IMPORT TOAST UND STANDARAUSSEHEN
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
@@ -77,8 +79,7 @@ const Login = () => {
     <div className="form-container">
       <form onSubmit ={handleSubmit}>
         <div className="brand">
-          <img src="" alt="" />
-          <h1>BrandName</h1>
+          <img src={logo} alt="" />
         </div>
         <input type="text" name="username" placeholder="Username" onChange={handleChange} value={input.username}/>
         <input type="password" name="password" placeholder="Password" onChange={handleChange} value={input.password}/>

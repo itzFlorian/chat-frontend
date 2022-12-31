@@ -22,6 +22,9 @@ p{
       width:100%
     }
   }
+  .selected{
+   border:2px solid rgb(137, 123, 216);   
+  }
   .card-container{
     display: flex;
     min-width: fit-content;
@@ -39,9 +42,6 @@ p{
      }
      p{
       font-size: 1.6rem;
-     }
-     .selected{
-      border:5px solid red;
      }
   }
   @media screen and (max-width: 850px){
