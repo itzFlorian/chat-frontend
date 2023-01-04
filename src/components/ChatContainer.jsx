@@ -1,7 +1,12 @@
 import "../styles/chat-container.scss"
-
+import ChatInput from "./ChatInput.jsx";
+import Messages from "./Messages.jsx";
 
 const ChatContainer = ({currentUser, currentSelected}) => {
+
+  const handleSendMsg = async (msg) => {
+    
+  }
   return (
     <div className="chat-header">
       <div className="user-details">
@@ -15,8 +20,8 @@ const ChatContainer = ({currentUser, currentSelected}) => {
 
         </div>
       </div>
-      <div className="chat-messages"></div>
-      <div className="chat-input"></div>
+      <Messages/>
+      <ChatInput handleSendMsg={handleSendMsg}/>
     </div>
   );
 };

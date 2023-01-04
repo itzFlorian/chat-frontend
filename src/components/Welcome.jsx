@@ -1,7 +1,6 @@
 import "../styles/welcome.scss"
 import logo from "../logo/Decrypt-welcome.png"
 const Welcome = ({currentUser}) => {
-  console.log(currentUser);
   return (
     <div className="welcome-container">
       <div className="logo">

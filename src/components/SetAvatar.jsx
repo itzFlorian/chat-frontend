@@ -60,7 +60,6 @@ const setAvatar = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.status);
         if(data.status === true){
           toast.info("Profilpicture updated", toastOptions)
         }
@@ -74,9 +73,8 @@ const setAvatar = () => {
     const fetchData = async () => {
       for (let i=0 ; i<4 ; i++ ){
         const image = await axios.get(`${api}/${Math.floor(Math.random()*1000)}`)
-        console.log(image.data);
-        const buffer = new Buffer(image.data)
-        data.push(buffer.toString("base64"))   
+        const buffer = Buffer.from(image.data).toString("base64")
+        data.push(buffer)   
       }
       setSelectAvatar({...selectAvatar, isLoading:false, avatars:data })
     }
@@ -99,7 +97,7 @@ const setAvatar = () => {
           })}
         </div>
         <button type="submit" onClick={setProfilePicture}>change picture</button>
-        <button type="submit" onClick={() => navigate("/")}><Link to="/">to Chat</Link></button>
+        {<button type="submit" onClick={() => navigate("/")}><Link to="/">to Chat</Link></button>}
         <ToastContainer />
       </div> 
     )
