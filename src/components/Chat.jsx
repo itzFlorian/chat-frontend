@@ -51,7 +51,7 @@ const Chat = () => {
 
   return (
     <>
-      <div className="chat-container">
+      <div className="chat-container">        
         <SearchFriend friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser}/>        
         <div className="container">          
           <Friends friends={friends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected}/>

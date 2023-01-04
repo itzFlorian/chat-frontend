@@ -6,8 +6,12 @@ const Welcome = ({currentUser}) => {
       <div className="logo">
         <img src={logo} alt="" />
       </div>
-      <h1 className="welcome-text">Welcome <span>{currentUser && currentUser.username}!</span></h1>
-      <h3>please Select a Friend to start chat</h3>
+      <div className="welcome-text">
+        <h1>Welcome <span>{currentUser && currentUser.username}!</span></h1>
+        <h3>please Select a Friend to start chat</h3>
+      </div>
+      <h4>If you´re new feel free to add itzFlorian to your friends.</h4>
+      <h4>Attention: usernames are casesensitive!</h4>
     </div>
   );
 };

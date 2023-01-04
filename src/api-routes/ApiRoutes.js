@@ -7,3 +7,5 @@ export const checkUserRoute = `${host}/users/check`
 export const searchRoute = `${host}/users/search`
 export const addFriendRoute = `${host}/users/addFriend`
 export const getAllFriendsRoute = `${host}/users/friends`
+export const sendMessagesRoute = `${host}/messages/addmsg`
+export const getMessagesRoute = `${host}/messages/getmsg`

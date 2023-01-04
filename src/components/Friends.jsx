@@ -1,10 +1,8 @@
 import "../styles/friends.scss"
 import logo from "../logo/Decrypt-chat.png"
-import { useState } from "react"
+import Logout from "./Logout.jsx"
 
-const Friends = ({currentUser, setCurrentUser, currentSelected, setCurrentSelected, friends}) => {
-
-
+const Friends = ({currentUser, currentSelected, setCurrentSelected, friends}) => {
 
 return (
   <>
@@ -12,6 +10,7 @@ return (
         <div className="brand">
           <img src={logo} alt="logo" />
         </div>
+
         {friends.map((friend, index) => {
           return (
                 <div key={index} className={`card-container ${friend === currentSelected && "selected"}`} onClick={() => {
@@ -19,11 +18,22 @@ return (
                   setCurrentSelected(friend)
                 }
                   }>
-                  <img className="picture" src = {friend.isAvatarImgSet ? `data:image/svg+xml;base64,${friend.avatarImg}` : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="avatar" />
+                  <img className="picture" src ={friend.isAvatarImgSet ? `data:image/svg+xml;base64,${friend.avatarImg}` : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="avatar" />
                   <p>{friend.username}</p>
                 </div>
             )
           })} 
+        <div className="user-details">
+            <div className="user">
+              <img className="picture" src = {`data:image/svg+xml;base64,${currentUser && currentUser.avatarImg}`} alt="avatar" />
+            <div className="username">
+              <h2>{currentUser && currentUser.username}</h2>
+            </div>
+            </div>
+            <div className="logout">
+              <Logout/>
+            </div>
+        </div>
       </div>      
   </>
 )

@@ -1,5 +1,8 @@
 .brand{
-  background:transparent
+  position: sticky;
+  top:0;
+  z-index: 1;
+  
 }
 p{
   color:white;
@@ -8,7 +11,7 @@ p{
   min-width: fit-content;
   overflow: auto;
   background-color: rgb(21, 24, 60);
-  height:100%;
+  min-height:100%;
   &::-webkit-scrollbar{
     width: 0.5rem;
     &-thumb {
@@ -38,10 +41,10 @@ p{
      img{
       margin:0;
       padding:0;
-      width: 100px;
+      width: 60px;
      }
      p{
-      font-size: 1.6rem;
+      font-size: 1.5rem;
      }
   }
   @media screen and (max-width: 850px){
@@ -51,6 +54,37 @@ p{
       }
       p{
         font-size: 1rem;
+      }
+    }
+  }
+  .user-details{
+    position: sticky;
+    // margin-top:50px;
+    bottom:0;
+    z-index: 2;
+    background-color: rgb(21, 24, 60);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 1rem ;
+    color:white;
+    .user{
+      width: 75px;
+      display: flex;
+      align-items: center;
+      gap:1rem;
+    }
+    .logout{
+      display:flex;
+      padding: 0 2rem;
+      align-items: center;
+      justify-content: center;
+      .logout-btn{
+        display:flex;
+        padding: 0 2rem;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 70px;
       }
     }
   }

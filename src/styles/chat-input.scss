@@ -1,8 +1,10 @@
 .chat-input-container{
+  position:sticky;
+  bottom:0;
   display: grid;
   grid-template-columns: 10% 90%;
   align-items: center;
-  background-color: #080420;
+  background-color: transparent;
   padding: 0 2rem;
   padding-bottom: 0.3rem;
   .button-container{

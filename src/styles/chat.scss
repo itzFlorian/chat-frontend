@@ -14,8 +14,15 @@
       background-color:#00000076;
       display: grid;
       grid-template-columns: 25% 75%;
-      // @media screen and (min-width:720px) and (max-width:1080px){
-      //   grid-template-columns: 35% 65%;
-      // }
+      overflow:auto;
+      &::-webkit-scrollbar{
+        width: 0.5rem;
+        &-thumb {
+          background-color: #303059;      
+          border-radius: 1rem;
+        }}
+      @media screen and (min-width:720px) and (max-width:1080px){
+        grid-template-columns: 35% 65%;
+      }
     }
 }
