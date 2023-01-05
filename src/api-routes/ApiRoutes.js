@@ -1,4 +1,4 @@
-export const host = "http://localhost:7000"
+export const host = "https://chat-be-k1co.onrender.com/"
 export const getOneRoute = `${host}/users`
 export const registerRoute = `${host}/users/register`
 export const loginRoute = `${host}/users/login`
