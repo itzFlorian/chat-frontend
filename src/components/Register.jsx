@@ -74,9 +74,6 @@ const Register = () => {
   }else if(password.length < 6) {
     toast.error("Password must have at least 7 charhacters", toastOptions)
     return false
-  }else if (email === ""){
-    toast.error("email is required", toastOptions)
-    return false
   }
   return true
   }
@@ -89,8 +86,7 @@ const Register = () => {
           <img src={logo} alt="" />
 
         </div>
-        <input type="text" name="username" placeholder="Username" onChange={handleChange} value={input.username}/>
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} value={input.email}/>
+        <input type="text" name="username" placeholder="Username" onChange={handleChange} value={input.username}/>        
         <input type="password" name="password" placeholder="Password" onChange={handleChange} value={input.password}/>
         <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} value={input.confirmPassword}/>
         <button type="submit">Submit</button>

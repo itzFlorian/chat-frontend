@@ -50,9 +50,6 @@ const Login = () => {
   });
   }
 }
-
-
-
   const handleChange = (e) => {
     setInput(prev => prev = {...input, [e.target.name]:e.target.value})
   }

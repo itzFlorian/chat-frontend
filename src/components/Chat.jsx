@@ -1,24 +1,29 @@
-import { useState, useEffect } from "react";
+import "../styles/chat.scss"
+
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { io } from "socket.io-client"
+
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
-import { getOneRoute } from "../api-routes/ApiRoutes.js";
-import "../styles/chat.scss"
+
 import SearchFriend from "./SearchFriend.jsx";
 import Friends from "./Friends.jsx"
 import Welcome from "./Welcome.jsx";
 import ChatContainer from "./ChatContainer.jsx";
-import Logout from "./Logout.jsx";
 
+import { host } from "../api-routes/ApiRoutes.js";
 
 const Chat = () => {
+  const socket = useRef()
 
   const navigate = useNavigate()
 
   const [currentUser, setCurrentUser] = useState(undefined)
   const [friends, setFriends] = useState([])
-
   const [currentSelected, setCurrentSelected] = useState(undefined)
+
+  const [showDelete, setShowDelete] = useState(false)
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"))
@@ -35,29 +40,28 @@ const Chat = () => {
     }else{
       navigate("/users/login")
     } 
-  },[])
+  },[showDelete])
 
   useEffect(()=>{
     if(currentUser && !currentUser.isAvatarImgSet){
       navigate("/users/setAvatar")
     }
-  },[currentUser])
+    if(currentUser){
+      socket.current = io(host)
+      socket.current.emit("add-user", currentUser._id)
+    }
+    },[currentUser])
 
-  const toastOptions = {
-    position:"bottom-right",
-    autoClose: 8000,
-    theme:"dark"
-  }
 
   return (
     <>
       <div className="chat-container">        
-        <SearchFriend friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser}/>        
+        <SearchFriend friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser} showDelete={showDelete}/>        
         <div className="container">          
-          <Friends friends={friends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected}/>
+          <Friends friends={friends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} />
           {currentSelected === undefined ? 
           <Welcome currentUser={currentUser} /> : 
-          <ChatContainer currentUser={currentUser} currentSelected={currentSelected}/>}        
+          <ChatContainer socket={socket} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} showDelete={showDelete} setShowDelete={setShowDelete}/>}        
         </div>
       </div>
       <ToastContainer/>

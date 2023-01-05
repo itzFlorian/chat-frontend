@@ -5,8 +5,7 @@ import "react-toastify/dist/ReactToastify.css"
 import "../styles/searchFriend.scss"
 import { addFriendRoute, searchRoute, getAllFriendsRoute } from "../api-routes/ApiRoutes.js";
 
-import Logout from "./Logout.jsx";
-const SearchFriend = ({setCurrentUser, setFriends}) => {  
+const SearchFriend = ({setCurrentUser, setFriends, showDelete}) => {  
   const [search, setSearch] = useState("")
   const [found, setFound] = useState(undefined)
 
@@ -29,7 +28,7 @@ const SearchFriend = ({setCurrentUser, setFriends}) => {
       }
       fetchData()
     }
-  },[found])
+  },[found, showDelete])
 
   const changeHandler = (e) => {
     setSearch(e.target.value)
@@ -38,7 +37,6 @@ const SearchFriend = ({setCurrentUser, setFriends}) => {
     setFound(undefined)
   }
   const addFriendHandler = () => {
-    console.log(found._id);
     const myId = JSON.parse(localStorage.getItem("id"))
     console.log(myId);
     fetch(`${addFriendRoute}/${found._id}`, {

@@ -1,9 +1,9 @@
 import "../styles/friends.scss"
 import logo from "../logo/Decrypt-chat.png"
 import Logout from "./Logout.jsx"
+import { useEffect } from "react"
 
 const Friends = ({currentUser, currentSelected, setCurrentSelected, friends}) => {
-
 return (
   <>
       <div className="friends">
@@ -13,8 +13,7 @@ return (
 
         {friends.map((friend, index) => {
           return (
-                <div key={index} className={`card-container ${friend === currentSelected && "selected"}`} onClick={() => {
-                  console.log("selected",currentSelected);
+                <div key={index} className={`card-container ${friend === currentSelected && "selected"}`} onClick={() => {                
                   setCurrentSelected(friend)
                 }
                   }>
