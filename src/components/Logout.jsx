@@ -14,8 +14,8 @@ const Logout = () => {
   }
 
   return (
-    <button className="logout-btn">
-      <BiPowerOff onClick={handleClick}/>
+    <button className="logout-btn" onClick={handleClick}>
+      <BiPowerOff />
     </button>
   );
 };
