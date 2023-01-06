@@ -4,14 +4,23 @@ import { sendMessagesRoute, getMessagesRoute, deleteFriendRoute } from "../api-r
 import { useState, useEffect, useRef } from "react";
 import { RiDeleteBinLine } from "react-icons/ri"
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
+
 const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected, showDelete, setShowDelete }) => {
+  
+  const toastOptions = {
+    position:"bottom-right",
+    autoClose: 8000,
+    theme:"dark"
+  }
 
   const [messages, setMessages] = useState([])
   const [msgArrived, setMsgArrived] =useState(undefined)
   const scrollRef = useRef()
+
   const deleteHandler = async () => {
   const token = JSON.parse(localStorage.getItem("token")) 
-
   fetch(deleteFriendRoute, {
     method:"PATCH",
         body:JSON.stringify({ 
@@ -22,10 +31,15 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
           authorization:"Bearer: " + token,
           'Content-type': 'application/json; charset=UTF-8',
           },
-      })  
-      setShowDelete(!showDelete)
-      setCurrentSelected(undefined)
+      })
+      .then(res => res.json())
+      .then(data => {
+        setShowDelete(!showDelete)
+        setCurrentSelected(undefined)
+        toast.info("Friend deleted", toastOptions)
+      })
 }
+
   useEffect(()=>{
     const fetchData = async () => {
       const response = await fetch(getMessagesRoute, {
@@ -40,7 +54,6 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
       })
       const data = await response.json()
       setMessages(data)
-
     }
     fetchData()
 

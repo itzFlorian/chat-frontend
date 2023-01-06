@@ -59,7 +59,6 @@ p{
   }
   .user-details{
     position: sticky;
-    // margin-top:50px;
     bottom:0;
     z-index: 2;
     background-color: rgb(21, 24, 60);
@@ -85,6 +84,19 @@ p{
         align-items: center;
         justify-content: center;
         margin-bottom: 70px;
+      }
+      .log-off-container{
+        position:absolute;
+        background-color: #303059;      
+        z-index: 3;
+        padding:1rem;
+        top:150px;
+        left:70px;
+        box-shadow: 0 0 5000px 5000px rgb(0 0 0 /0.6);
+        .delete-btn{
+          background-color: red;
+        }
+
       }
     }
   }

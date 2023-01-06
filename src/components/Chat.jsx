@@ -58,7 +58,7 @@ const Chat = () => {
       <div className="chat-container">        
         <SearchFriend friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser} showDelete={showDelete}/>        
         <div className="container">          
-          <Friends friends={friends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} />
+          <Friends showDelete={showDelete} friends={friends} setFriends={setFriends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} />
           {currentSelected === undefined ? 
           <Welcome currentUser={currentUser} /> : 
           <ChatContainer socket={socket} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} showDelete={showDelete} setShowDelete={setShowDelete}/>}        

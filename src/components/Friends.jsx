@@ -1,10 +1,22 @@
 import "../styles/friends.scss"
 import logo from "../logo/Decrypt-chat.png"
 import Logout from "./Logout.jsx"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom";
+const Friends = ({currentUser, currentSelected, setCurrentSelected, friends, setFriends, showDelete}) => {
+  const [logoffVar, setLogoffVar] = useState(false)
+  
+  const navigate = useNavigate()
 
-const Friends = ({currentUser, currentSelected, setCurrentSelected, friends}) => {
-return (
+  const handleClick = async () => {
+    setLogoffVar(!logoffVar)
+  }
+  const handleLogoff = () => {
+    console.log("hallo");
+    navigate("/users/login")
+    localStorage.clear()
+  }
+  return (
   <>
       <div className="friends">
         <div className="brand">
@@ -30,7 +42,14 @@ return (
             </div>
             </div>
             <div className="logout">
-              <Logout/>
+              <Logout handleClick={handleClick}/>
+              { logoffVar &&
+                <div className="log-off-container">
+                  <p>Do you really want to log out?</p>
+                  <button className="delete-btn" onClick={handleLogoff}>Logout</button>
+                  <button onClick={handleClick}>cancel</button>
+                </div>
+              }
             </div>
         </div>
       </div>      
