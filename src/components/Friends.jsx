@@ -25,15 +25,16 @@ const Friends = ({currentUser, currentSelected, setCurrentSelected, friends, set
 
         {friends.map((friend, index) => {
           return (
-                <div key={index} className={`card-container ${friend === currentSelected && "selected"}`} onClick={() => {                
-                  setCurrentSelected(friend)
-                }
-                  }>
-                  <img className="picture" src ={friend.isAvatarImgSet ? `data:image/svg+xml;base64,${friend.avatarImg}` : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="avatar" />
-                  <p>{friend.username}</p>
-                </div>
+        <div key={index} className={`card-container ${friend === currentSelected && "selected"}`} onClick={() =>{                
+          setCurrentSelected(friend)
+        }
+        }>
+        <img className="picture" src ={friend.isAvatarImgSet ? `data:image/svg+xml;base64,${friend.avatarImg}` : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="avatar" />
+        <p>{friend.username}</p>
+        </div>
             )
           })} 
+          
         <div className="user-details">
             <div className="user">
               <img className="picture" src = {`data:image/svg+xml;base64,${currentUser && currentUser.avatarImg}`} alt="avatar" />

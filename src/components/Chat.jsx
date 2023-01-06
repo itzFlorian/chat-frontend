@@ -22,6 +22,7 @@ const Chat = () => {
   const [currentUser, setCurrentUser] = useState(undefined)
   const [friends, setFriends] = useState([])
   const [currentSelected, setCurrentSelected] = useState(undefined)
+  const [openAddFriends, setOpenAddFriends] = useState(false)
 
   const [showDelete, setShowDelete] = useState(false)
 
@@ -55,8 +56,8 @@ const Chat = () => {
 
   return (
     <>
-      <div className="chat-container">        
-        <SearchFriend friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser} showDelete={showDelete}/>        
+      <div className="chat-container">  
+        <SearchFriend friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser} showDelete={showDelete}/>       
         <div className="container">          
           <Friends showDelete={showDelete} friends={friends} setFriends={setFriends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} />
           {currentSelected === undefined ? 

@@ -7,6 +7,11 @@
   align-items: center;
   gap:1rem;
   background-color: #131324;
+  .add-icon{
+    font-size: 5rem;
+    color:white;
+    cursor: pointer;
+  }
     .container{
       overflow:auto;
       height: 85vh;
