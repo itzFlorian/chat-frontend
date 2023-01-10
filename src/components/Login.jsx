@@ -3,7 +3,7 @@ import { loginRoute } from "../api-routes/ApiRoutes.js";
 import { useState } from "react";
 import {Link, useNavigate} from "react-router-dom"
 
-import logo from "../logo/Decrypt.png"
+import logo from "../logo/Dunkel Hellblau Neon Futuristisch Musik Band Logo  (1).png"
 
 // IMPORT TOAST UND STANDARAUSSEHEN
 import { toast, ToastContainer } from "react-toastify";

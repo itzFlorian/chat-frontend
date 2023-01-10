@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css"
 import "../styles/searchFriend.scss"
 import { addFriendRoute, searchRoute, getAllFriendsRoute } from "../api-routes/ApiRoutes.js";
 
-const SearchFriend = ({setCurrentUser, setFriends, showDelete}) => {  
+const SearchFriend = ({setCurrentUser, setFriends, showDelete, openAddFriends}) => {  
   const [search, setSearch] = useState("")
   const [found, setFound] = useState(undefined)
 
@@ -79,24 +79,28 @@ const SearchFriend = ({setCurrentUser, setFriends, showDelete}) => {
           setFound(json.existedUser)
         }
       });
-  }
+  }  
+      return (
+        <div className="search">
+          <form onSubmit={searchSubmitHandler}></form>
+          <span>Search for Users: </span>
+          <input type="text" name="search" onChange={changeHandler} value={search} />
+          <button type="submit" onClick={searchSubmitHandler}>search</button>
+          {found && 
+          <div className="found-container">
+            <img className="picture" src={found.isAvatarImgSet ? `data:image/svg+xml;base64,${found.avatarImg}` : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="" />
+            <p>{found.username}</p>
+            <button className="btn" onClick={addFriendHandler}>Add Friend</button>
+            <button className="btn" onClick={closeHandler}>close</button>
+          </div>
+          }
+      </div>      
+      );
+      
+
+          
+      
   
-  return (
-    <div className="search">
-      <form onSubmit={searchSubmitHandler}></form>
-      <span>Search for Users: </span>
-      <input type="text" name="search" onChange={changeHandler} value={search} />
-      <button type="submit" onClick={searchSubmitHandler}>search</button>
-      {found && 
-      <div className="found-container">
-        <img className="picture" src={found.isAvatarImgSet ? `data:image/svg+xml;base64,${found.avatarImg}` : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="" />
-        <p>{found.username}</p>
-        <button className="btn" onClick={addFriendHandler}>Add Friend</button>
-        <button className="btn" onClick={closeHandler}>close</button>
-      </div>
-      }
-  </div>
-  );
 };
 
 export default SearchFriend;

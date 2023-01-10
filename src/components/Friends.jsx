@@ -1,5 +1,5 @@
 import "../styles/friends.scss"
-import logo from "../logo/Decrypt-chat.png"
+import logo from "../logo/Dunkel Hellblau Neon Futuristisch Musik Band Logo .png"
 import Logout from "./Logout.jsx"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,6 @@ const Friends = ({currentUser, currentSelected, setCurrentSelected, friends, set
     setLogoffVar(!logoffVar)
   }
   const handleLogoff = () => {
-    console.log("hallo");
     navigate("/users/login")
     localStorage.clear()
   }
@@ -37,13 +36,14 @@ const Friends = ({currentUser, currentSelected, setCurrentSelected, friends, set
           
         <div className="user-details">
             <div className="user">
-              <img className="picture" src = {`data:image/svg+xml;base64,${currentUser && currentUser.avatarImg}`} alt="avatar" />
-            <div className="username">
-              <h2>{currentUser && currentUser.username}</h2>
-            </div>
+                <img className="picture" src = {`data:image/svg+xml;base64,${currentUser && currentUser.avatarImg}`} alt="avatar" />
+              <div className="username">
+                <h2>{currentUser && currentUser.username}</h2>
+              </div>
             </div>
             <div className="logout">
               <Logout handleClick={handleClick}/>
+            </div>
               { logoffVar &&
                 <div className="log-off-container">
                   <p>Do you really want to log out?</p>
@@ -51,7 +51,6 @@ const Friends = ({currentUser, currentSelected, setCurrentSelected, friends, set
                   <button onClick={handleClick}>cancel</button>
                 </div>
               }
-            </div>
         </div>
       </div>      
   </>

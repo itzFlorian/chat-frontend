@@ -4,6 +4,8 @@ import { sendMessagesRoute, getMessagesRoute, deleteFriendRoute } from "../api-r
 import { useState, useEffect, useRef } from "react";
 import { RiDeleteBinLine } from "react-icons/ri"
 
+import { v4 as uuidv4 } from "uuid";
+
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"
 
@@ -118,13 +120,15 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
           </div>
         }
       <div className="chat-messages">
-        {messages.map((msg, index)=>{
+        {messages.map((msg)=>{
+          console.log(msg);
           return(
-            <div>
+            <div ref={scrollRef} key={uuidv4()}>
               <div 
               className={`message ${msg.fromSelf ? "sended" : "received" }`}>
                 <div className="content">
                   <p>{msg.message}</p>
+                  <p>{msg.date}</p>
                 </div>
               </div>
             </div>

@@ -12,17 +12,18 @@ import Friends from "./Friends.jsx"
 import Welcome from "./Welcome.jsx";
 import ChatContainer from "./ChatContainer.jsx";
 
-import { host } from "../api-routes/ApiRoutes.js";
+import { host, getOneRoute } from "../api-routes/ApiRoutes.js";
 
 const Chat = () => {
   const socket = useRef()
-
+  
   const navigate = useNavigate()
-
+  
   const [currentUser, setCurrentUser] = useState(undefined)
   const [friends, setFriends] = useState([])
   const [currentSelected, setCurrentSelected] = useState(undefined)
   const [openAddFriends, setOpenAddFriends] = useState(false)
+  
 
   const [showDelete, setShowDelete] = useState(false)
 
@@ -31,7 +32,7 @@ const Chat = () => {
     const id = JSON.parse(localStorage.getItem("id"))
     if(token){
       const fetchUser = async () =>{
-        fetch(`getOneRoute/${id}`)
+        fetch(`${getOneRoute}/${id}`)
           .then(response => response.json())
           .then(data => {
             setCurrentUser(data)
@@ -57,12 +58,16 @@ const Chat = () => {
   return (
     <>
       <div className="chat-container">  
-        <SearchFriend friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser} showDelete={showDelete}/>       
-        <div className="container">          
+          <SearchFriend  openAddfriends={openAddFriends} friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser} showDelete={showDelete}/>          
+        
+        <div className="container">  
+
           <Friends showDelete={showDelete} friends={friends} setFriends={setFriends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} />
+          
           {currentSelected === undefined ? 
-          <Welcome currentUser={currentUser} /> : 
-          <ChatContainer socket={socket} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} showDelete={showDelete} setShowDelete={setShowDelete}/>}        
+          <Welcome currentUser={currentUser} /> 
+          :
+          <ChatContainer socket={socket} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} showDelete={showDelete} setShowDelete={setShowDelete}/>}          
         </div>
       </div>
       <ToastContainer/>

@@ -1,5 +1,5 @@
 import "../styles/welcome.scss"
-import logo from "../logo/Decrypt-welcome.png"
+import logo from "../logo/Dunkel Hellblau Neon Futuristisch Musik Band Logo  (3).png"
 const Welcome = ({currentUser}) => {
   return (
     <div className="welcome-container">
