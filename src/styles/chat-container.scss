@@ -1,5 +1,5 @@
 .chat-header{
-    .show-delete-container{
+  .show-delete-container{
       z-index: 5;
       font-size: 1.2rem;
       position:absolute;
@@ -30,17 +30,19 @@
     color:red;
     cursor: pointer;
    }
-  .user-details{
+  .user-details{ 
+    max-width: 100%;      
     position: sticky;
     top:0;
-    z-index: 2;
+    
     background-color: rgb(21, 24, 60);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:0 1rem ;
+    padding:0 5rem ;
     color:white;
     .user{
+      // margin-left:50px;
       padding:1rem;
       width: 75px;
       display: flex;
@@ -61,10 +63,13 @@
       }
     }
   }
+  @media screen and (min-width:720px) and (max-width:1080px){
+    grid-template-columns: 40% 60%;
+  }
 }
 .chat-messages{
   background-color: transparent;
-  min-height: 94%;
+  min-height: 85%;
   padding:1rem 2rem;
   display: flex;
   flex-direction: column;

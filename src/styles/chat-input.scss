@@ -1,17 +1,20 @@
 .chat-input-container{
-  position:sticky;
+  position:sticky; 
+  margin-left:50px; 
   bottom:0;
+  right:0;
   display: grid;
-  grid-template-columns: 10% 90%;
+  grid-template-columns: 5% 90%;
   align-items: center;
+  justify-content: center;
   background-color: transparent;
   padding: 0 2rem;
   padding-bottom: 0.3rem;
   .button-container{
     display: flex;
     align-items: center;
+    justify-content: center;
     color:white;
-    gap:1rem;
     .emoji{
       position: relative;
       svg{
@@ -21,7 +24,7 @@
       }
       .EmojiPickerReact{
         position: absolute;
-        top:-470px;
+        top:-470px;        
         background-color: #080420;
         box-shadow: 0 5px 10px #9a86f3;
         border-color: #9a86f3;
