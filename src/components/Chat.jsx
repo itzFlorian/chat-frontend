@@ -12,7 +12,7 @@ import Friends from "./Friends.jsx"
 import Welcome from "./Welcome.jsx";
 import ChatContainer from "./ChatContainer.jsx";
 
-import { host, getOneRoute } from "../api-routes/ApiRoutes.js";
+import { host, getOneRoute, getAllFriendsRoute } from "../api-routes/ApiRoutes.js";
 
 const Chat = () => {
   const socket = useRef()
@@ -22,10 +22,25 @@ const Chat = () => {
   const [currentUser, setCurrentUser] = useState(undefined)
   const [friends, setFriends] = useState([])
   const [currentSelected, setCurrentSelected] = useState(undefined)
-  const [openAddFriends, setOpenAddFriends] = useState(false)
-  
+  const [showAddFriend, setShowAddFriend] = useState(false)
 
   const [showDelete, setShowDelete] = useState(false)
+
+  useEffect(() => {   
+    const token = JSON.parse(localStorage.getItem("token")) 
+    const id = JSON.parse(localStorage.getItem("id"))
+    if ( token && id ){
+      const fetchData = async  () => {        
+        await fetch(`${getAllFriendsRoute}/${id}`)
+          .then((response) => response.json())
+          .then((data) => {
+            setCurrentUser(data.me)
+            setFriends(data.friends)
+          });
+      }
+      fetchData()
+    }
+  },[])
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"))
@@ -58,16 +73,19 @@ const Chat = () => {
   return (
     <>
       <div className="chat-container">  
-          <SearchFriend  openAddfriends={openAddFriends} friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser} showDelete={showDelete}/>          
         
         <div className="container">  
 
-          <Friends showDelete={showDelete} friends={friends} setFriends={setFriends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} />
+          <Friends showDelete={showDelete} friends={friends} setFriends={setFriends} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} showAddFriend={showAddFriend} setShowAddFriend={setShowAddFriend}/>
           
-          {currentSelected === undefined ? 
+          {!currentSelected && !showAddFriend ? 
           <Welcome currentUser={currentUser} /> 
+          : currentSelected && !showAddFriend? 
+          <ChatContainer socket={socket} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} showDelete={showDelete} setShowDelete={setShowDelete}/> 
           :
-          <ChatContainer socket={socket} currentUser={currentUser} currentSelected={currentSelected} setCurrentSelected={setCurrentSelected} showDelete={showDelete} setShowDelete={setShowDelete}/>}          
+          <SearchFriend   friends={friends} setFriends={setFriends} currentUser={currentUser} setCurrentUser={setCurrentUser} showDelete={showDelete} setShowAddFriend={setShowAddFriend}/>          
+          
+          }          
         </div>
       </div>
       <ToastContainer/>

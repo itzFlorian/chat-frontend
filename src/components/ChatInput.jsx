@@ -33,7 +33,7 @@ const ChatInput = ({handleSendMsg}) => {
       <div className="button-container">
         <div className="emoji">
           <BsEmojiSmileFill onClick={handleEmojiPicker}/>
-          {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick}/>}
+          {showEmojiPicker && <Picker theme="dark" onEmojiClick={handleEmojiClick}/>}
         </div>
       </div>
       <form className="input-container" onSubmit={sendChat}>

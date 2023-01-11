@@ -2,7 +2,7 @@ import "../styles/chat-container.scss"
 import ChatInput from "./ChatInput.jsx";
 import { sendMessagesRoute, getMessagesRoute, deleteFriendRoute, getAllMessagesRoute } from "../api-routes/ApiRoutes.js";
 import { useState, useEffect, useRef } from "react";
-import { RiDeleteBinLine } from "react-icons/ri"
+import {FiUserX} from "react-icons/fi"
 import Spinner from "./Spinner.jsx"
 
 import { v4 as uuidv4 } from "uuid";
@@ -133,8 +133,8 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
               <h2>{currentSelected && currentSelected.username}</h2>
             </div>
           </div>
-          <div className="close" onClick={()=>setShowDelete(!showDelete)}>
-            <RiDeleteBinLine/>
+          <div className="close delete-btn" onClick={()=>setShowDelete(!showDelete)}>
+            <button><FiUserX/></button>
           </div>
         </div>
         {showDelete && 
@@ -147,7 +147,7 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
       <div className="chat-messages">
         {isLoaded ? 
         <>
-        <button className="btn-msg" onClick={getAllMessages}>load older messages</button>
+        { messages.length >= 10 && <button className="btn-msg" onClick={getAllMessages}>load older messages</button>}
         {messages.map((msg)=>{
           return(
             <div ref={scrollRef} key={uuidv4()}>
@@ -168,6 +168,7 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
       }
       </div>
       <ChatInput handleSendMsg={handleSendMsg}/>
+      <ToastContainer/>
     </div>
   );
 };

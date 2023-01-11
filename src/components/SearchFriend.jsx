@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css"
 import "../styles/searchFriend.scss"
 import { addFriendRoute, searchRoute, getAllFriendsRoute } from "../api-routes/ApiRoutes.js";
 
-const SearchFriend = ({setCurrentUser, setFriends, showDelete, openAddFriends}) => {  
+const SearchFriend = ({setCurrentUser, setFriends, showDelete, setShowAddFriend}) => {  
   const [search, setSearch] = useState("")
   const [found, setFound] = useState(undefined)
 
@@ -83,15 +83,21 @@ const SearchFriend = ({setCurrentUser, setFriends, showDelete, openAddFriends}) 
       return (
         <div className="search">
           <form onSubmit={searchSubmitHandler}></form>
-          <span>Search for Users: </span>
-          <input type="text" name="search" onChange={changeHandler} value={search} />
-          <button type="submit" onClick={searchSubmitHandler}>search</button>
+          <h1>Search for Friends </h1>
+          <p className="att">attenion: usernames are casesensitive</p>
+          <input type="text" name="search" onChange={changeHandler} placeholder="username" value={search} />
+          <div>
+            <button className="btn" type="submit" onClick={searchSubmitHandler}>search</button>
+            <button onClick={()=> setShowAddFriend(false)}>back</button>
+          </div>
           {found && 
           <div className="found-container">
             <img className="picture" src={found.isAvatarImgSet ? `data:image/svg+xml;base64,${found.avatarImg}` : "https://www.apex-motor.co.za/wp-content/uploads/2020/10/test-avatar.png"} alt="" />
             <p>{found.username}</p>
-            <button className="btn" onClick={addFriendHandler}>Add Friend</button>
-            <button className="btn" onClick={closeHandler}>close</button>
+            <div className="found-btn-container">
+              <button className="btn" onClick={addFriendHandler}>Add</button>
+              <button className="btn" onClick={closeHandler}>close</button>
+            </div>
           </div>
           }
       </div>      

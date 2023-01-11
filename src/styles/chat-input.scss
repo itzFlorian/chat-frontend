@@ -1,8 +1,8 @@
-.chat-input-container{
+.chat-input-container{  
   position:sticky; 
   margin-left:1.3rem; 
-  bottom:0;
-  right:0;
+  bottom:10px;
+  right:10px;
   display: grid;
   grid-template-columns: 10% 90%;
   align-items: center;
@@ -28,19 +28,14 @@
         background-color: #080420;
         box-shadow: 0 5px 10px #9a86f3;
         border-color: #9a86f3;
+        
         li.epr-emoji-category{
           justify-content: center;
           grid-template-columns: repeat(auto);
         }
         .epr-tone-neutral{
-          // display: none;
-        }
-        .emoji-scroll-wrapper::-webkit-scrollbar{
-          background-color: #080420;
-          width: 5px;
-          &-thumb{
-            background-color: #9186f3;
-          }
+          display: none;
+          visibility: hidden;
         }
         .epr-emoji-categories{
           button{
@@ -50,10 +45,31 @@
         .epr-search, .epr-emoji-category-label{
           background-color: #080420;
         }
+        .epr-emoji-category-content{
+          margin:0;
+          padding:0;        
+          gap:0;
+          button{
+            margin:0;
+          }
+        }
+        .epr-category-nav{
+          display:none;
+          button{
+            margin:0;
+          }
+          .epr-body::-webkit-scrollbar {
+            background-color: #080420;
+            width: 5px;
+            &-thumb{
+              background-color: #9186f3;
+            }
+          }
+        }
       }
     }
   }
-  .input-container{
+  .input-container{    
     width: 100%;
     border-radius: 2rem;
     display: flex;
