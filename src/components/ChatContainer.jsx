@@ -1,8 +1,9 @@
 import "../styles/chat-container.scss"
 import ChatInput from "./ChatInput.jsx";
-import { sendMessagesRoute, getMessagesRoute, deleteFriendRoute } from "../api-routes/ApiRoutes.js";
+import { sendMessagesRoute, getMessagesRoute, deleteFriendRoute, getAllMessagesRoute } from "../api-routes/ApiRoutes.js";
 import { useState, useEffect, useRef } from "react";
 import { RiDeleteBinLine } from "react-icons/ri"
+import Spinner from "./Spinner.jsx"
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -19,6 +20,7 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
 
   const [messages, setMessages] = useState([])
   const [msgArrived, setMsgArrived] =useState(undefined)
+  const [isLoaded, setIsLoaded] =useState(false)
   const scrollRef = useRef()
 
   const deleteHandler = async () => {
@@ -44,6 +46,7 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
 
   useEffect(()=>{
     const fetchData = async () => {
+      setIsLoaded(false)
       const response = await fetch(getMessagesRoute, {
         method:"POST",
         body:JSON.stringify({ 
@@ -55,6 +58,9 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
           },
       })
       const data = await response.json()
+      if(data){
+        setIsLoaded(true)
+      }
       setMessages(data)
     }
     fetchData()
@@ -96,8 +102,27 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
   },[msgArrived])
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behaviour: "smooth" })
+    scrollRef.current?.scrollIntoView({ behaviour: "smooth" })    
   },[messages])
+
+  const getAllMessages = async () => {
+    setIsLoaded(false)
+      const response = await fetch(getAllMessagesRoute, {
+        method:"POST",
+        body:JSON.stringify({ 
+          from: currentUser._id,
+          to: currentSelected._id
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          },
+      })
+      const data = await response.json()
+      if(data){
+        setIsLoaded(true)
+      }
+      setMessages(data)
+  }
 
   return (
     <div className="chat-header">
@@ -120,8 +145,10 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
           </div>
         }
       <div className="chat-messages">
+        {isLoaded ? 
+        <>
+        <button className="btn-msg" onClick={getAllMessages}>load older messages</button>
         {messages.map((msg)=>{
-          console.log(msg);
           return(
             <div ref={scrollRef} key={uuidv4()}>
               <div 
@@ -134,6 +161,11 @@ const ChatContainer = ({socket, currentUser, currentSelected, setCurrentSelected
             </div>
           )
         })}  
+        </>
+        
+        : <div className="spinner"><Spinner/><p>decrypting...</p></div>
+        
+      }
       </div>
       <ChatInput handleSendMsg={handleSendMsg}/>
     </div>

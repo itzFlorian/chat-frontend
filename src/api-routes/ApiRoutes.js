@@ -1,4 +1,4 @@
-export const host = "https://chat-be-k1co.onrender.com"
+export const host = ""
 export const getOneRoute = `${host}/users`
 export const registerRoute = `${host}/users/register`
 export const loginRoute = `${host}/users/login`
@@ -10,3 +10,4 @@ export const deleteFriendRoute = `${host}/users/delFriend`
 export const getAllFriendsRoute = `${host}/users/friends`
 export const sendMessagesRoute = `${host}/messages/addmsg`
 export const getMessagesRoute = `${host}/messages/getmsg`
+export const getAllMessagesRoute = `${host}/messages/getmsgall`
