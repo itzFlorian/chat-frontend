@@ -18,7 +18,7 @@ const Friends = ({currentUser, currentSelected, setCurrentSelected, friends, set
   return (
   <>
       <div className="friends">
-        <div className="brand">
+        <div className="brand" onClick={()=>setCurrentSelected(undefined)}>
           <img src={logo} alt="logo" />
         </div>
 
